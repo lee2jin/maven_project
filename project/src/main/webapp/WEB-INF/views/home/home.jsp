@@ -4,12 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>My site</title>
+<title>My Site</title>
 </head>
 <body>
-<div align="center">
-<div><h1>내 사이트에 오신것을 환영합니다.</h1></div>
-	<a href="loginform.do">로그인</a>
-</div>
+	<div align="center">
+		<div><h1>내 사이트에 오신것을 환영합니다.</h1></div>
+		<a href="loginform.do">로그인</a> <!-- loginform.jsp를 반환 -->
+	</div>
 </body>
 </html>

@@ -1,4 +1,4 @@
-package co.jin.project.memver.web;
+package co.jin.project.member.web;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

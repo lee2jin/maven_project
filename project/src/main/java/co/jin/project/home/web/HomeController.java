@@ -17,15 +17,18 @@ public class HomeController extends HttpServlet {
         super();
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, 
+			HttpServletResponse response) throws ServletException, IOException 
+	{
 		// 여기서만 작업하면 된다.
 		String page= "home/home";
 		ViewResolve.views(request, response, page);
 		
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+							throws ServletException, IOException {
+							doGet(request, response);
 	}
 
 }

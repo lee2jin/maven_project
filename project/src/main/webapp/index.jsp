@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
- 	<jsp:forward page="home.do"/>
+	<h1>시작하는 곳</h1>
+	<jsp:forward page="home.do" />
+	<!-- response.sendRedirect() 동일 -->
 </body>
 </html>
