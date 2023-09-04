@@ -10,7 +10,7 @@
 	<div align="center">
 	<jsp:include page="../menu/메뉴바.jsp" />
 	<div>
-	<h1>제목</h1>
+	<h1>Wellcome!!</h1>
 	</div>
 	</div>
 

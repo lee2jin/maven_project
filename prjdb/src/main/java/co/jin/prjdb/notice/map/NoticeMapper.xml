@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="co.jin.prjdb.notice.map.NoticeMapper">
-	<select id="noticeSelctList" resultType="co.jin.prjdb.notice.service.NoticeVO">
+	<select id="noticeSelectList" resultType="co.jin.prjdb.notice.service.NoticeVO">
 	SELECT * FORM NOTICE
 	<if test ="key == 'title'"> WHERE NOTICE_TITLE LIKE '%'||{#val} ||'%' </if>
 	<if test ="key == 'content'"> WHERE NOTICE_CONTENT LIKE '%'||{#val} ||'%' </if>
@@ -9,13 +9,15 @@
 	</select>
 	
 	
-	<select id="noticeSelct">
-		SELECT * FROM NOTICE WHERE NOTICE_ID = #{noticeId}
+	<select id="noticeSelect">
+		SELECT * FROM NOTICE 
+		WHERE NOTICE_ID = #{noticeId}
 	</select>
 	
 	<insert id="noticeInsert">
 		<selectKey keyProperty="id" resultType="int" order="BEFORE">
-			SLELCT NVL(MAX(NOTICE_ID),1) +1 AS ID
+			SLELCT 
+			NVL(MAX(NOTICE_ID),1) +1 AS ID
 			FROM NOTICE
 			</selectKey>			
 		INSERT INTO NOTICE

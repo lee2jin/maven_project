@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import co.jin.prjdb.common.Sha256;
 import co.jin.prjdb.common.ViewResolve;
 import co.jin.prjdb.member.service.MemberService;
 import co.jin.prjdb.member.service.MemberVO;
@@ -27,7 +28,7 @@ public class MemberJoin extends HttpServlet {
 		MemberVO vo = new MemberVO();
 		
 		vo.setMemberId(request.getParameter("memberId"));
-		vo.setMemberPassword(request.getParameter("memberPassword"));
+		vo.setMemberPassword(Sha256.encrypt(request.getParameter("memberPassword")));
 		vo.setMemberName(request.getParameter("memberName"));
 		vo.setMemberTel(request.getParameter("memberTel"));
 		

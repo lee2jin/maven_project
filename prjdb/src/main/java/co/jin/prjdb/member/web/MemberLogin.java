@@ -15,7 +15,7 @@ import co.jin.prjdb.member.service.MemberService;
 import co.jin.prjdb.member.service.MemberVO;
 import co.jin.prjdb.member.serviceImpl.MemberServiceImpl;
 
-@WebServlet("/MemberLogin")
+@WebServlet("/Memberlogin")
 public class MemberLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

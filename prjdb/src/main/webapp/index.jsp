@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>title</title>
+<title>prjdb</title>
 </head>
 <body>
 <jsp:forward page="home.do" />

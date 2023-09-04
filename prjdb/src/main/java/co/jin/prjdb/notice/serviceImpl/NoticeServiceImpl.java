@@ -21,6 +21,7 @@ public class NoticeServiceImpl implements NoticeService {
 
 	@Override
 	public NoticeVO noticeSelect(NoticeVO vo) {
+		map.noticeHitUpdate(vo.getNoticeId()); //조회수를 증가 시킨다.
 		return map.noticeSelect(vo);
 	}
 
