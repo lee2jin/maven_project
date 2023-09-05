@@ -11,6 +11,7 @@ import co.jin.prjdb.notice.service.NoticeVO;
 
 public class NoticeServiceImpl implements NoticeService {
 
+	
 	private SqlSession sqlSession = DataSource.getInstance().openSession(true);
 	private NoticeMapper map = sqlSession.getMapper(NoticeMapper.class);
 	

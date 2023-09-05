@@ -13,7 +13,7 @@
 <div>
     <h2>게시글 목록</h2>
 </div>
-<form action="">
+<form id="search">
     <table border="1">
      <tr>
           <td>
@@ -24,7 +24,7 @@
             <option value ="writer">작성자</option>
         </select>
         <input type="text" name="val" id="val">&nbsp;&nbsp;
-        <input type="button" id="btn" value="검색" onclick="serchList()">
+        <input type="button" id="btn" value="검색" onclick="searchList()">
          </td>
     </tr>
     </table>
@@ -45,18 +45,65 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
+       
+       		 <c:choose>
+       		 	<c:when test="${empty notices }">
+       			 <tr>
+       				 <td colspan="7" align = "center" >데이터가 존재하지 않습니다.</td>
+       			 </tr>
+       		 </c:when>
+       		 <c:otherwise>
+       			  <c:forEach items="${notices }" var="n">
+          				<tr>
+              			  <td align="center">${n.noticeId }</td>
+              			  <td align="center">
+                                <img src="attech/notice/${n.noticeImage }">
+                           </td>
+              			  <td>${n.noticeTitle }</td>
+             			   <td align="center">${n.noticeWriterName }</td>
+             			   <td align="center">${n.noticeDate }</td>
+             			   <td align="center">${n.noticeHit }</td>
+             			   <td align="center">${n.noticeAttach }</td>
+         			   </tr>
+          		  </c:forEach>
+          	  </c:otherwise>
+            </c:choose>
         </tbody>
     </table>
-</div>
+</div><br>
+<div>
+<script>
+
+function searchList(){ //ajax 포스트 방식
+    let form = document.getElementById("search");
+    let key = form.key.value;
+    let value = form.value.value;
+  //  const formData = new FormData(form); //자바스크립트 FormData class / 포스트 방식으로 던질때는 폼 방식으로 받는게 좋다
+ //   let payload = formData;
+  let payload = "key"+key+"&val"+val;
+    let url = "ajaxNoticeSearch.do";
+    fetch(url,{
+        method: "POST",
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        body:payload
+    }).then(Response => Response.json())
+      .then(json =>htmlViews(json));
+}
+
+function htmlViews(datas) {
+	document.querySelect('tbody').remove();
+	const tbody = document.createElement('tbody');
+	tbody.innerHTML = datas.map(data => )
+	
+}
+
+function enterKey(e) {
+	if
+	
+}
+</script>
+
+
 
 </body>
 </html>

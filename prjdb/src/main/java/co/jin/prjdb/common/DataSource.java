@@ -14,7 +14,7 @@ public class DataSource {
 	}
 
 	public static SqlSessionFactory getInstance() {
-		String resource = "mybatise-config.xml";
+		String resource = "mybatis-config.xml";
 		try {
 			InputStream inputStream = Resources.getResourceAsStream(resource);
 			sqlSessionFactory 

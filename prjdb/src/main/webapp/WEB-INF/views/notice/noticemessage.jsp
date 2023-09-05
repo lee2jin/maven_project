@@ -8,13 +8,7 @@
 </head>
 <body>
 	<div align="center">
-	<jsp:include page="../menu/메뉴바.jsp" />
-	<div>
-	<h1>Wellcome!!</h1>
+		<jsp:include page="../menu/메뉴바.jsp" />
 	</div>
-		<img alt="" src="img/꽃.jpg">
-	
-	</div>
-
 </body>
 </html>

@@ -5,7 +5,10 @@
 <configuration>
 
 	<properties resource = "database.properties"/>
-	
+	<settings>
+	<setting name="mapUnderscoreToCamelCase" value="true"/>
+	<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
 	
 	
   <environments default="development">
@@ -14,7 +17,7 @@
       <dataSource type="POOLED">
         <property name="driver" value="${driver}"/>
         <property name="url" value="${url}"/>
-        <property name="username" value="${name}"/>
+        <property name="username" value="${user}"/>
         <property name="password" value="${password}"/>
       </dataSource>
     </environment>

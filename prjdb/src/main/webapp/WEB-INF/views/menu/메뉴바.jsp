@@ -57,6 +57,7 @@ a {
 			<c:if test ="${empty id }">
 				<li><a href="memberjoin.do">Join</a></li>
 				<li><a href="memberloginform.do">Login</a></li>
+				<li><a href="noticeselectlist.do">Notice</a></li>
 			</c:if>
 			
 			<c:if test ="${not empty id }">

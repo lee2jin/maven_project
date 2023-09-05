@@ -10,12 +10,13 @@ import lombok.Setter;
 public class NoticeVO {
 	private int noticeId;
 	private String noticeWriter;
-	private String noticTitle;
+	private String noticeTitle;
 	private String noticeContent;
 	private LocalDate noticeDate;
 	private int noticeHit;
 	private String noticeAttech;
 	private String noticeImage;
 	private String noticeWriterName;
+	private String noticeThumbnail;
 }
 
