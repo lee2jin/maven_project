@@ -62,7 +62,7 @@ text-align: center;
 		</ul>
 		<ul id="btn">
 			<li><button id="insertBtn">저장</button></li>
-			<li><button>선택삭제</button></li>
+			<li><button id="delBtn" name="delBtn">선택삭제</button></li>
 		</ul>
 		
 	
@@ -72,7 +72,7 @@ text-align: center;
 		<table>
 			<thead>
 				<tr>
-					<td><input type = "checkbox"></td>
+					<td><input type = "checkbox" id="checkAll" name="check"></td>
 					<td>도서코드</td>
 					<td>도서명</td>
 					<td>저자</td>
@@ -105,10 +105,14 @@ text-align: center;
 					//tr.addEventListener('dblclick', showEditForm); //더블클릭이벤트 
 					tr.setAttribute('bid', book.bookId);
 					let td = document.createElement('td');
-					let input = document.createElement('input');
-					input.type = "checkbox";
-					td.appendChild(input);
+					//체크박스
+					let check = document.createElement('input');
+					check.setAttribute('type', 'checkbox');
+					check.setAttribute('data-bid', book.bookId); //data-() : 개인적인 속성 만들기 넘 신기
+					check.setAttribute('class', 'book_chk');
+					td.appendChild(check);
 					tr.appendChild(td);
+					
 					for (let prop of fields) {
 						let td = document.createElement('td');
 						td.innerText =book[prop];
@@ -117,7 +121,7 @@ text-align: center;
 					td = document.createElement('td');
 					let btn = document.createElement('button');
 					btn.innerText = "삭제";
-					//btn.addEventListener('click', deleteReplyFnc);
+					btn.setAttribute('onclick', 'bookDel("'+book.bookId+'",this)');
 					td.appendChild(btn);
 					tr.appendChild(td);
 					//document.querySelector('#replyList').appendChild(tr);
@@ -127,36 +131,93 @@ text-align: center;
 	
 	$("#insertBtn").click(function () {
 		console.log("확인");
-		let id = document.querySelector('input[name=bId]').value;
-		let name = document.querySelector('input[name=bname]').value;
-		let writer = document.querySelector('input[name=bwriter]').value;
-		let com = document.querySelector('input[name=bcom]').value;
-		let price = document.querySelector('input[name=bprice]').value;
-				
-		$.ajax({
-			url: 'ajaxbookinsert.do',
-			type: 'post',
-			data: {
-				id: id,
-				name: name,
-				writer: writer,
-				com: com,
-				price: price,
-			},
-			success: function (e) {
-				console.log(e.retCode);
-				if (e.retCode == 'Success') {
-					alert('등록 완료');
-				} else {
-					alert('등록 실패');
-				}
-			},
-			error: function (e) {
-				console.log(e.retCode);
+		let bookId = document.querySelector('input[name=bId]').value;
+		let bookName = document.querySelector('input[name=bname]').value;
+		let bookWriter = document.querySelector('input[name=bwriter]').value;
+		let bookCom = document.querySelector('input[name=bcom]').value;
+		let bookPrice = document.querySelector('input[name=bprice]').value;
+		
+		const book = {bookId:bookId, bookName:bookName, bookWriter:bookWriter,
+				bookCom:bookCom, bookPrice:bookPrice}
+		//console.log('book들어옴')
+		//console.log(book)
+		
+		bookObj.bookAdd(book, function(data){
+			console.log('bookAdd들어옴')
+			if(data.retCode == 'Success'){
+				let tr = makeTr(data.data);
+				document.querySelector('#bookData').appendChild(tr);
+				fieldInit(); //댓글등록 후 창 비우기
+			}else if (data.retCode == 'Fail'){
+				alert("에러!")
+			}else{
+				alert("잘못된 코드 반환")
 			}
-
 		})
 	});
+	
+	function fieldInit() { //댓글등록후 창 비우기
+		document.querySelector('input[name=bId]').value='';
+		document.querySelector('input[name=bname]').value='';
+		document.querySelector('input[name=bwriter]').value='';
+		document.querySelector('input[name=bcom]').value='';
+		document.querySelector('input[name=bprice]').value='';
+	}
+	
+	//삭제버튼 클릭
+	function bookDel(bookId, obj){
+		console.log("삭제 버튼 누름");
+		bookObj.bookDelete(bookId, function (result){
+			console.log(result);
+			console.log(obj);
+			if(result.retCode == 'Success'){
+				obj.parentElement.parentElement.remove();
+			}else if (data.retCode == 'Fail'){
+				alert("에러!")
+			}else{
+				alert("잘못된 코드 반환")
+			}
+		})
+	}
+	
+	//체크된거 삭제
+	document.querySelector('#delBtn').addEventListener('click', function (e) {
+		let checkbox = document.querySelectorAll('.book_chk');
+		console.log('del들어오나요');
+		for (let c of checkbox) {
+			if (c.checked == true) {
+				let bookId = c.getAttribute('data-bid');
+				console.log(bookId);
+
+				bookObj.bookDelete(bookId, function (data) {
+					console.log(data);
+
+					if (data.retCode == 'Success') {
+						c.parentElement.parentElement.remove();
+					} else if (data.retCode == 'Fail') {
+						alert("처리중 에러.");
+					} else {
+						alert("잘못된코드반환.");
+					}
+				})
+			}
+		}
+	})
+	//전체 체크
+			document.querySelector('#checkAll').addEventListener('change', function (e) {
+				let checkbox = document.querySelectorAll('input[type=checkbox]');
+				console.log(e);
+				console.log(e.target.checked);
+				if (e.target.checked == true) {
+					for (let prop of checkbox) {
+						prop.checked = true;
+					}
+				} else {
+					for (let prop of checkbox) {
+						prop.checked = false;
+					}
+				}
+			})
 	</script>
 </body>
 </html>
