@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ajax.html</title>
+<script>
+	let json= `[{"name": "홍길동", "age":20},{"name": "김골동", "age":22}]`;
+	// json포맷의 문자 => 자바스크립트에서 객체로 쉽게 변환할 수 있음 . JSON.parse()
+	// 자바스크립트의 객체 => json 포맷의 문자 . JSON.stringify()
+	let obj = JSON.parse(json);
+	//console.log(obj);
+	
+	let str = JSON.stringify(obj);
+	//console.log(str);
+	
+</script>
+</head>
+<body>
+	<h3>Asynchronous Javascript And Xml</h3>
+	
+	<ul id="list">
+		<li>first + last</li>
+	</ul>
+	
+	<script>
+		// Ajax 처리 객체 : XMLHttpRequest
+		let ajx = new XMLHttpRequest();
+		ajx.open('get', '../AjaxReplyList.do?nid=1');  //eXtendsible Markup Language
+		ajx.send();
+		ajx.onload =  getReply;  
+		
+		function getReply(){
+			console.log(ajx.responseText);
+		}
+		
+		
+		function getJson(){
+			console.log(ajx.responseText); //문자열
+			let data = JSON.parse(ajx.responseText);
+			console.log(data);  //자바스크립트 객체타입
+			
+			for(let i=0 ; i< data.length ; i++){
+				let li = document.createElement('li');
+				li.innerText = data[i].first_name + ' ' + data[i].last_name
+				document.getElementById('list').appendChild(li);
+			}
+			
+		}
+			
+		function genXML(){
+		console.log(ajx.responseXML);
+			let xml = ajx.responseXML;
+			let records = xml.getElementsByTagName('record');
+			//console.log(ids[0].innerText);			
+			for(let i=0 ; i < records.length ; i++){
+				let li = document.createElement('li');
+				li.innerText = records[i].children[1].innerHTML + ', '+ records[i].children[2].innerHTML
+				document.getElementById('list').appendChild(li);
+			}	
+			//	document.querySelector('body').innerHTML = ajx.responseText;
+		}
+		
+	</script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-package co.jin.prj.admin;
+package co.jiye.prjdb;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,20 +7,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import co.jin.prj.common.ViewResolve;
+import co.jiye.prjdb.common.ViewResolve;
 
-@WebServlet("/adminhome.do")
-public class AdminHome extends HttpServlet {
+@WebServlet("/home.do")
+public class HomeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public AdminHome() {
+    public HomeController() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String page = "management/adminhome";
-		ViewResolve.forward(request, response, page);
-	
+		String page = "home/home";
+		ViewResolve.views(request, response, page);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
