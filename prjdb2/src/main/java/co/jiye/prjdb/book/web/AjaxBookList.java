@@ -54,6 +54,7 @@ public class AjaxBookList extends HttpServlet {
 			PrintWriter out = response.getWriter(); // json 문자열로 반환해줌
 			out.print(json);
 
+
 		}
 	}
 
