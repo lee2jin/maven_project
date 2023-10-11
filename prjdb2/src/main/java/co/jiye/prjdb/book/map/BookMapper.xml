@@ -12,12 +12,12 @@
 	
 	<insert id = "bookInsert" parameterType="co.jiye.prjdb.book.service.BookVO">
 	INSERT INTO BOOK(BOOK_ID, BOOK_NAME, BOOK_WRITER, BOOK_COM, BOOK_PRICE)
-	VALUES(${bookId},${bookName},${bookWriter},${bookCom},${bookPrice})
+	VALUES(#{bookId},#{bookName},#{bookWriter},#{bookCom},#{bookPrice})
 	</insert>
 	
 	<delete id = "bookDelete" parameterType="co.jiye.prjdb.book.service.BookVO">
 		DELETE BOOK
-		WHERE BOOK_ID = ${bookId}
+		WHERE BOOK_ID = #{bookId}
 	</delete>
 
 </mapper>
